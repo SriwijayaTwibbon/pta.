@@ -1,56 +1,74 @@
+/* =====================================
+   TWIBBON PENERIMAAN TAMU AMBALAN
+   SMK SRIWIJAYA 2026
 
-// ==============================
-// VARIABEL
-// ==============================
-
-
-const intro = document.getElementById("intro");
-
-const homePage = document.getElementById("home-page");
-
-const editPage = document.getElementById("edit-page");
-
-const finishPage = document.getElementById("finish-page");
+   SCRIPT.JS PART 1
+===================================== */
 
 
-const uploadImage = document.getElementById("uploadImage");
+/* ===============================
+   ELEMENT
+================================ */
 
-const typeSelect = document.getElementById("typeSelect");
+
+const splash1 = document.getElementById("splash1");
+const splash2 = document.getElementById("splash2");
+
+const home = document.getElementById("home");
+const loadingPage = document.getElementById("loadingPage");
+const editorPage = document.getElementById("editorPage");
+const finishPage = document.getElementById("finishPage");
 
 
-const canvas = document.getElementById("twibbonCanvas");
+const kategori = document.getElementById("kategori");
 
+const upload = document.getElementById("upload");
+const btnUpload = document.getElementById("btnUpload");
+
+const namaFile = document.getElementById("namaFile");
+
+
+const toast = document.getElementById("toast");
+const toastText = document.getElementById("toastText");
+const toastClose = document.getElementById("toastClose");
+
+
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 
 const zoomInBtn = document.getElementById("zoomIn");
-
 const zoomOutBtn = document.getElementById("zoomOut");
 
 
-const saveButton = document.getElementById("saveButton");
+const saveBtn = document.getElementById("saveBtn");
 
 
-const resultImage = document.getElementById("resultImage");
+const hasilImage = document.getElementById("hasilImage");
 
 
-const downloadButton = document.getElementById("downloadButton");
-
-const editAgain = document.getElementById("editAgain");
-
-const backHome = document.getElementById("backHome");
+const editAgainBtn = document.getElementById("editAgain");
+const downloadBtn = document.getElementById("downloadBtn");
+const homeBtn = document.getElementById("homeBtn");
 
 
+const downloadNotif =
+document.getElementById("downloadNotif");
 
 
-// ==============================
-// DATA EDIT
-// ==============================
+
+/* ===============================
+   DATA EDITOR
+================================ */
 
 
-let selectedType = "";
+let kategoriAktif = "";
 
-let userImage = new Image();
+
+let uploadedImage = new Image();
+
+let templateImage = new Image();
+
 
 
 let imageX = 0;
@@ -63,34 +81,45 @@ let imageScale = 1;
 
 let dragging = false;
 
-let startX = 0;
-let startY = 0;
+
+let dragStartX = 0;
+let dragStartY = 0;
 
 
 
-let templateImage = new Image();
+let hasilDownload = "";
+
+
+
+/* ===============================
+   UKURAN CANVAS
+================================ */
+
+
+canvas.width = 983;
+canvas.height = 1229;
 
 
 
 
+/* ===============================
+   SPLASH SCREEN
+================================ */
 
-// ==============================
-// INTRO ANIMATION
-// ==============================
+
+window.addEventListener("load",()=>{
 
 
-window.onload = () => {
+    splash1.classList.add("active");
 
 
     setTimeout(()=>{
 
 
-        document.querySelector(".logo-animation-1")
-        .style.display="none";
+        splash1.classList.remove("active");
 
 
-        document.querySelector(".logo-animation-2")
-        .style.display="flex";
+        splash2.classList.add("active");
 
 
     },3000);
@@ -100,35 +129,89 @@ window.onload = () => {
     setTimeout(()=>{
 
 
-        intro.style.display="none";
+        splash2.classList.remove("active");
 
 
-        homePage.style.display="block";
+        home.classList.add("active");
 
 
     },6000);
 
 
-
-};
-
+});
 
 
 
 
 
+/* ===============================
+   GANTI HALAMAN
+================================ */
+
+
+function pindahHalaman(target){
+
+
+    document
+    .querySelectorAll(".page")
+    .forEach(page=>{
+
+
+        page.classList.remove("active");
+
+
+    });
 
 
 
-// ==============================
-// PILIH TEMPLATE
-// ==============================
+    target.classList.add("active");
 
 
-typeSelect.addEventListener("change",()=>{
+}
 
 
-    selectedType = typeSelect.value;
+
+
+/* ===============================
+   TOAST
+================================ */
+
+
+function tampilPesan(text){
+
+
+    toastText.innerHTML=text;
+
+
+    toast.classList.add("show");
+
+
+}
+
+
+
+toastClose.addEventListener("click",()=>{
+
+
+    toast.classList.remove("show");
+
+
+});
+
+
+
+
+
+/* ===============================
+   PILIH KATEGORI
+================================ */
+
+
+kategori.addEventListener("change",()=>{
+
+
+    kategoriAktif =
+    kategori.value;
 
 
 });
@@ -138,60 +221,86 @@ typeSelect.addEventListener("change",()=>{
 
 
 
+/* ===============================
+   BUTTON UPLOAD
+================================ */
+
+
+btnUpload.addEventListener("click",()=>{
+
+
+    if(kategoriAktif===""){
+
+
+        tampilPesan(
+        "Pilih dulu kamu peserta atau panitia"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+    upload.click();
+
+
+
+});
 
 
 
 
-// ==============================
-// UPLOAD FOTO
-// ==============================
 
 
-uploadImage.addEventListener("change",(event)=>{
+/* ===============================
+   INPUT GAMBAR
+================================ */
 
 
-    let file = event.target.files[0];
+upload.addEventListener("change",(event)=>{
 
 
-    if(!file) return;
+    let file =
+    event.target.files[0];
 
 
 
-    let reader = new FileReader();
+    if(!file){
+
+        return;
+
+    }
+
+
+
+    namaFile.innerHTML =
+    file.name;
+
+
+
+
+    pindahHalaman(loadingPage);
+
+
+
+
+    let reader =
+    new FileReader();
 
 
 
     reader.onload = function(e){
 
 
-        userImage.onload=function(){
-
-
-            imageScale = 1;
-
-
-            imageX = canvas.width/2;
-
-            imageY = canvas.height/2;
-
-
-
-            loadTemplate();
-
-
-            showPage(editPage);
-
-
-
-        };
-
-
-
-        userImage.src=e.target.result;
-
+        uploadedImage.src =
+        e.target.result;
 
 
     };
+
 
 
     reader.readAsDataURL(file);
@@ -204,34 +313,40 @@ uploadImage.addEventListener("change",(event)=>{
 
 
 
+/* ===============================
+   FOTO SELESAI DIBACA
+================================ */
+
+
+uploadedImage.onload = ()=>{
+
+
+    setTimeout(()=>{
+
+
+        bukaEditor();
+
+
+    },800);
 
 
 
-
-// ==============================
-// LOAD TEMPLATE
-// ==============================
-
-
-function loadTemplate(){
+};
+/* =====================================
+   SCRIPT.JS PART 2
+   EDITOR CANVAS
+===================================== */
 
 
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+/* ===============================
+   BUKA EDITOR
+================================ */
 
 
-
-    drawUserImage();
-
+function bukaEditor(){
 
 
-
-    if(selectedType==="peserta"){
+    if(kategoriAktif==="peserta"){
 
 
         templateImage.src =
@@ -239,7 +354,9 @@ function loadTemplate(){
 
 
     }
-    else if(selectedType==="panitia"){
+
+
+    else if(kategoriAktif==="panitia"){
 
 
         templateImage.src =
@@ -250,19 +367,81 @@ function loadTemplate(){
 
 
 
-    templateImage.onload=()=>{
+}
 
 
-        ctx.drawImage(
-            templateImage,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
 
 
-    };
+/* ===============================
+   TEMPLATE SELESAI LOAD
+================================ */
+
+
+templateImage.onload = ()=>{
+
+
+    aturPosisiAwal();
+
+
+    gambarCanvas();
+
+
+    pindahHalaman(editorPage);
+
+
+
+};
+
+
+
+
+
+/* ===============================
+   POSISI AWAL FOTO
+================================ */
+
+
+function aturPosisiAwal(){
+
+
+
+    imageScale = 1;
+
+
+
+    let scaleWidth =
+    canvas.width / uploadedImage.width;
+
+
+
+    let scaleHeight =
+    canvas.height / uploadedImage.height;
+
+
+
+    let scaleTerbesar =
+    Math.max(scaleWidth,scaleHeight);
+
+
+
+    imageScale =
+    scaleTerbesar;
+
+
+
+    imageX =
+    (
+        canvas.width -
+        uploadedImage.width * imageScale
+    ) / 2;
+
+
+
+    imageY =
+    (
+        canvas.height -
+        uploadedImage.height * imageScale
+    ) / 2;
 
 
 
@@ -272,65 +451,12 @@ function loadTemplate(){
 
 
 
+/* ===============================
+   GAMBAR CANVAS
+================================ */
 
 
-
-
-// ==============================
-// GAMBAR FOTO
-// ==============================
-
-
-function drawUserImage(){
-
-
-
-    if(!userImage.src)
-    return;
-
-
-
-    let width =
-    userImage.width * imageScale;
-
-
-    let height =
-    userImage.height * imageScale;
-
-
-
-    ctx.drawImage(
-
-        userImage,
-
-        imageX-width/2,
-
-        imageY-height/2,
-
-        width,
-
-        height
-
-    );
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ==============================
-// RENDER ULANG
-// ==============================
-
-
-function redraw(){
+function gambarCanvas(){
 
 
     ctx.clearRect(
@@ -342,22 +468,48 @@ function redraw(){
 
 
 
-    drawUserImage();
+    /*
+      Foto berada di belakang
+    */
+
+
+    ctx.drawImage(
+
+        uploadedImage,
+
+        imageX,
+
+        imageY,
+
+        uploadedImage.width *
+        imageScale,
+
+        uploadedImage.height *
+        imageScale
+
+    );
 
 
 
-    if(templateImage.src){
+
+    /*
+       Twibbon selalu di depan
+    */
 
 
-        ctx.drawImage(
-            templateImage,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
+    ctx.drawImage(
 
-    }
+        templateImage,
+
+        0,
+
+        0,
+
+        canvas.width,
+
+        canvas.height
+
+    );
 
 
 
@@ -368,55 +520,59 @@ function redraw(){
 
 
 
+/* ===============================
+   ZOOM IN
+================================ */
 
 
+zoomInBtn.addEventListener("click",()=>{
 
 
-// ==============================
-// ZOOM
-// ==============================
+    imageScale += 0.05;
 
 
-zoomInBtn.onclick=()=>{
+    gambarCanvas();
 
 
-    imageScale +=0.1;
-
-
-    redraw();
-
-
-};
-
-
-
-zoomOutBtn.onclick=()=>{
-
-
-    imageScale -=0.1;
-
-
-    if(imageScale<0.1)
-    imageScale=0.1;
-
-
-    redraw();
-
-
-};
+});
 
 
 
 
 
 
+/* ===============================
+   ZOOM OUT
+================================ */
+
+
+zoomOutBtn.addEventListener("click",()=>{
+
+
+    if(imageScale>0.1){
+
+
+        imageScale -=0.05;
+
+
+    }
 
 
 
-// ==============================
-// DRAG MOUSE WINDOWS
-// ==============================
+    gambarCanvas();
 
+
+
+});
+
+
+
+
+
+
+/* ===============================
+   DRAG MOUSE WINDOWS
+================================ */
 
 
 canvas.addEventListener(
@@ -427,13 +583,19 @@ canvas.addEventListener(
     dragging=true;
 
 
-    startX=e.offsetX-imageX;
+    dragStartX =
+    e.clientX -
+    imageX;
 
-    startY=e.offsetY-imageY;
+
+    dragStartY =
+    e.clientY -
+    imageY;
 
 
 
 });
+
 
 
 
@@ -443,17 +605,27 @@ canvas.addEventListener(
 (e)=>{
 
 
-    if(!dragging)
-    return;
+    if(!dragging){
+
+        return;
+
+    }
 
 
 
-    imageX=e.offsetX-startX;
+    imageX =
+    e.clientX -
+    dragStartX;
 
-    imageY=e.offsetY-startY;
 
 
-    redraw();
+    imageY =
+    e.clientY -
+    dragStartY;
+
+
+
+    gambarCanvas();
 
 
 
@@ -461,7 +633,9 @@ canvas.addEventListener(
 
 
 
-canvas.addEventListener(
+
+
+window.addEventListener(
 "mouseup",
 ()=>{
 
@@ -473,27 +647,13 @@ canvas.addEventListener(
 
 
 
-canvas.addEventListener(
-"mouseleave",
-()=>{
-
-
-    dragging=false;
-
-
-});
 
 
 
 
-
-
-
-
-
-// ==============================
-// DRAG HP TOUCH
-// ==============================
+/* ===============================
+   TOUCH HP
+================================ */
 
 
 canvas.addEventListener(
@@ -501,26 +661,29 @@ canvas.addEventListener(
 (e)=>{
 
 
+    let touch =
+    e.touches[0];
+
+
+
     dragging=true;
 
 
-    let touch=e.touches[0];
+
+    dragStartX =
+    touch.clientX -
+    imageX;
 
 
-    let rect=canvas.getBoundingClientRect();
 
-
-
-    startX=
-    touch.clientX-rect.left-imageX;
-
-
-    startY=
-    touch.clientY-rect.top-imageY;
+    dragStartY =
+    touch.clientY -
+    imageY;
 
 
 
 });
+
 
 
 
@@ -531,33 +694,44 @@ canvas.addEventListener(
 (e)=>{
 
 
-    if(!dragging)
-    return;
+    if(!dragging){
+
+        return;
+
+    }
 
 
 
-    let touch=e.touches[0];
-
-
-    let rect=canvas.getBoundingClientRect();
+    e.preventDefault();
 
 
 
-    imageX=
-    touch.clientX-rect.left-startX;
+    let touch =
+    e.touches[0];
 
 
 
-    imageY=
-    touch.clientY-rect.top-startY;
+    imageX =
+    touch.clientX -
+    dragStartX;
 
 
 
-    redraw();
+    imageY =
+    touch.clientY -
+    dragStartY;
 
 
 
+    gambarCanvas();
+
+
+
+},
+{
+    passive:false
 });
+
 
 
 
@@ -572,53 +746,79 @@ canvas.addEventListener(
 
 
 });
+/* =====================================
+   SCRIPT.JS PART 3 FINAL
+   SAVE - DOWNLOAD - FINISH
+===================================== */
+
+
+
+/* ===============================
+   SIMPAN HASIL EDIT
+================================ */
+
+
+saveBtn.addEventListener("click",()=>{
+
+
+    /*
+       Render terakhir sebelum simpan
+    */
+
+
+    gambarCanvas();
+
+
+
+    hasilDownload =
+    canvas.toDataURL(
+        "image/png",
+        1.0
+    );
+
+
+
+    hasilImage.src =
+    hasilDownload;
+
+
+
+    pindahHalaman(finishPage);
+
+
+
+});
 
 
 
 
 
 
+/* ===============================
+   EDIT LAGI
+================================ */
+
+
+editAgainBtn.addEventListener("click",()=>{
+
+
+    pindahHalaman(editorPage);
 
 
 
-// ==============================
-// SIMPAN HASIL
-// ==============================
-
-
-
-saveButton.onclick=()=>{
-
-
-    let result =
-    canvas.toDataURL("image/png");
-
-
-
-    resultImage.src=result;
-
-
-
-    showPage(finishPage);
-
-
-
-};
+});
 
 
 
 
 
 
+/* ===============================
+   DOWNLOAD IMAGE
+================================ */
 
 
-
-// ==============================
-// DOWNLOAD
-// ==============================
-
-
-downloadButton.onclick=()=>{
+downloadBtn.addEventListener("click",()=>{
 
 
     let link =
@@ -626,13 +826,13 @@ downloadButton.onclick=()=>{
 
 
 
-    link.download=
-    "Twibbon-SMK-Sriwijaya-2026.png";
+    link.download =
+    "Twibbon_Penerimaan_Tamu_Ambalan_SMK_Sriwijaya.png";
 
 
 
-    link.href=
-    resultImage.src;
+    link.href =
+    hasilDownload;
 
 
 
@@ -640,83 +840,129 @@ downloadButton.onclick=()=>{
 
 
 
-    backHome.style.display="block";
+
+    tampilDownload();
 
 
 
-};
+    /*
+       Tombol beranda aktif
+    */
+
+
+    homeBtn.style.display =
+    "block";
 
 
 
-
-
-
-
-
-
-// ==============================
-// EDIT ULANG
-// ==============================
-
-
-editAgain.onclick=()=>{
-
-
-    showPage(editPage);
-
-
-
-};
+});
 
 
 
 
 
 
+/* ===============================
+   NOTIF DOWNLOAD
+================================ */
+
+
+function tampilDownload(){
+
+
+    downloadNotif.classList.add("show");
 
 
 
-// ==============================
-// KEMBALI BERANDA
-// ==============================
+    setTimeout(()=>{
 
 
-backHome.onclick=()=>{
+        downloadNotif.classList.remove("show");
 
 
-    showPage(homePage);
-
-
-
-};
-
-
-
-
-
-
-
-
-
-// ==============================
-// GANTI PAGE
-// ==============================
-
-
-function showPage(page){
-
-
-
-    homePage.style.display="none";
-
-    editPage.style.display="none";
-
-    finishPage.style.display="none";
-
-
-
-    page.style.display="block";
+    },4000);
 
 
 
 }
+
+
+
+
+
+
+/* ===============================
+   KEMBALI BERANDA
+================================ */
+
+
+homeBtn.addEventListener("click",()=>{
+
+
+    /*
+       reset upload
+    */
+
+
+    upload.value="";
+
+
+    namaFile.innerHTML =
+    "Belum ada gambar dipilih";
+
+
+
+    kategori.value="";
+
+
+    kategoriAktif="";
+
+
+
+    imageX=0;
+
+    imageY=0;
+
+    imageScale=1;
+
+
+
+    pindahHalaman(home);
+
+
+
+});
+
+
+
+
+
+
+/* ===============================
+   DEFAULT HIDDEN HOME BUTTON
+================================ */
+
+
+homeBtn.style.display="none";
+
+
+
+
+
+
+/* ===============================
+   CEGAH MENU REFRESH
+================================ */
+
+
+window.addEventListener(
+"beforeunload",
+()=>{
+
+
+    localStorage.removeItem(
+    "twibbonTemp"
+    );
+
+
+});
