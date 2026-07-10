@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twibbon Penerimaan Tamu Ambalan 2026</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<!-- =========================
+     MENU ANIMASI PEMBUKA
+========================= -->
+
+<section id="intro">
+
+    <div class="intro-box logo-animation-1">
+
+        <img src="assets/logo1.png" class="intro-logo">
+
+        <h1>SMK Sriwijaya</h1>
+
+        <p>Karangpucung</p>
+
+    </div>
+
+
+
+    <div class="intro-box logo-animation-2">
+
+        <img src="assets/logo2.png" class="intro-logo">
+
+        <h1>
+            Penerimaan Tamu Ambalan 2026
+        </h1>
+
+    </div>
+
+
+</section>
+
+
+
+
+
+<!-- =========================
+     HEADER WEBSITE
+========================= -->
+
+<header id="main-header">
+
+    <img src="assets/logo1.png" class="header-logo">
+
+    <div class="header-title">
+
+        <h2>
+            Twibbon Penerimaan Tamu Ambalan
+        </h2>
+
+    </div>
+
+
+    <img src="assets/logo2.png" class="header-logo">
+
+
+</header>
+
+
+
+
+
+<!-- =========================
+     MENU BERANDA
+========================= -->
+
+
+<section id="home-page" class="page">
+
+
+    <div class="home-container">
+
+
+        <h3>
+            Pilih Jenis Twibbon
+        </h3>
+
+
+        <select id="typeSelect">
+
+            <option value="">
+                Pilih Peserta / Panitia
+            </option>
+
+
+            <option value="peserta">
+                Peserta
+            </option>
+
+
+            <option value="panitia">
+                Panitia
+            </option>
+
+
+        </select>
+
+
+
+
+        <label class="upload-box">
+
+            <span>
+                Masukkan Foto Anda
+            </span>
+
+
+            <input 
+            type="file" 
+            id="uploadImage"
+            accept="image/*"
+            >
+
+
+        </label>
+
+
+
+    </div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =========================
+     MENU EDITING
+========================= -->
+
+
+<section id="edit-page" class="page">
+
+
+<div class="editor-container">
+
+
+
+    <div class="canvas-wrapper">
+
+
+        <canvas 
+        id="twibbonCanvas"
+        width="983"
+        height="1229">
+        </canvas>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="control-panel">
+
+
+        <button id="zoomIn">
+            Zoom In
+        </button>
+
+
+
+        <button id="zoomOut">
+            Zoom Out
+        </button>
+
+
+
+        <button id="saveButton">
+            Simpan
+        </button>
+
+
+    </div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =========================
+     MENU SELESAI
+========================= -->
+
+
+<section id="finish-page" class="page">
+
+
+<div class="finish-container">
+
+
+
+    <h3>
+        Twibbon Selesai
+    </h3>
+
+
+
+
+    <div class="result-box">
+
+
+        <img 
+        id="resultImage"
+        >
+
+
+    </div>
+
+
+
+
+
+    <div class="finish-button">
+
+
+        <button id="editAgain">
+            Edit
+        </button>
+
+
+
+
+        <button id="downloadButton">
+            Download
+        </button>
+
+
+
+        <button 
+        id="backHome"
+        style="display:none">
+
+            Beranda
+
+        </button>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+
+<footer>
+
+    Copyright SMK Sriwijaya 2026
+
+</footer>
+
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
