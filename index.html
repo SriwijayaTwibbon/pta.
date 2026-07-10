@@ -3,297 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twibbon Penerimaan Tamu Ambalan 2026</title>
+    <title>Twibbon Penerimaan Tamu Ambalan</title>
 
     <link rel="stylesheet" href="style.css">
-</head>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
 <body>
 
+<!-- ===========================
+NOTIFIKASI
+=========================== -->
 
-<!-- =========================
-     MENU ANIMASI PEMBUKA
-========================= -->
+<div id="toast" class="toast">
+    <div class="toast-box">
+        <p id="toastText"></p>
+        <button id="toastClose">OKE</button>
+    </div>
+</div>
 
-<section id="intro">
+<div id="downloadNotif" class="downloadNotif">
+    Gambar berhasil didownload.<br>
+    Terimakasih.
+</div>
 
-    <div class="intro-box logo-animation-1">
+<!-- ===========================
+SPLASH 1
+=========================== -->
 
-        <img src="assets/logo1.png" class="intro-logo">
+<section id="splash1" class="page splash active">
+
+    <div class="splash-content">
+
+        <img src="assets/logo1.png" class="logoSplash">
 
         <h1>SMK Sriwijaya</h1>
 
-        <p>Karangpucung</p>
+        <h3>Karangpucung</h3>
 
     </div>
-
-
-
-    <div class="intro-box logo-animation-2">
-
-        <img src="assets/logo2.png" class="intro-logo">
-
-        <h1>
-            Penerimaan Tamu Ambalan 2026
-        </h1>
-
-    </div>
-
 
 </section>
 
+<!-- ===========================
+SPLASH 2
+=========================== -->
 
+<section id="splash2" class="page splash">
 
+    <div class="splash-content">
 
+        <img src="assets/logo2.png" class="logoSplash">
 
-<!-- =========================
-     HEADER WEBSITE
-========================= -->
+        <h1>Penerimaan Tamu Ambalan</h1>
 
-<header id="main-header">
-
-    <img src="assets/logo1.png" class="header-logo">
-
-    <div class="header-title">
-
-        <h2>
-            Twibbon Penerimaan Tamu Ambalan
-        </h2>
+        <h3>2026 / 2027</h3>
 
     </div>
 
+</section>
 
-    <img src="assets/logo2.png" class="header-logo">
+<!-- ===========================
+HEADER
+=========================== -->
 
+<header id="mainHeader">
+
+    <img src="assets/logo1.png">
+
+    <h2>Twibbon Penerimaan Tamu Ambalan</h2>
+
+    <img src="assets/logo2.png">
 
 </header>
 
+<!-- ===========================
+BERANDA
+=========================== -->
 
+<section id="home" class="page">
 
+<div class="container">
 
+<div class="card">
 
-<!-- =========================
-     MENU BERANDA
-========================= -->
+<p class="desc">
 
+Buat Twibbon penerimaan tamu ambalan menggunakan foto terbaik kamu!
 
-<section id="home-page" class="page">
+</p>
 
+<div class="form-group">
 
-    <div class="home-container">
+<label>Pilih Kategori</label>
 
+<select id="kategori">
 
-        <h3>
-            Pilih Jenis Twibbon
-        </h3>
+<option value="">Pilih Peserta / Panitia</option>
 
+<option value="peserta">Peserta</option>
 
-        <select id="typeSelect">
+<option value="panitia">Panitia</option>
 
-            <option value="">
-                Pilih Peserta / Panitia
-            </option>
-
-
-            <option value="peserta">
-                Peserta
-            </option>
-
-
-            <option value="panitia">
-                Panitia
-            </option>
-
-
-        </select>
-
-
-
-
-        <label class="upload-box">
-
-            <span>
-                Masukkan Foto Anda
-            </span>
-
-
-            <input 
-            type="file" 
-            id="uploadImage"
-            accept="image/*"
-            >
-
-
-        </label>
-
-
-
-    </div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- =========================
-     MENU EDITING
-========================= -->
-
-
-<section id="edit-page" class="page">
-
-
-<div class="editor-container">
-
-
-
-    <div class="canvas-wrapper">
-
-
-        <canvas 
-        id="twibbonCanvas"
-        width="983"
-        height="1229">
-        </canvas>
-
-
-
-    </div>
-
-
-
-
-
-    <div class="control-panel">
-
-
-        <button id="zoomIn">
-            Zoom In
-        </button>
-
-
-
-        <button id="zoomOut">
-            Zoom Out
-        </button>
-
-
-
-        <button id="saveButton">
-            Simpan
-        </button>
-
-
-    </div>
-
-
+</select>
 
 </div>
 
+<div class="form-group">
 
-</section>
+<label>Upload Gambar</label>
 
+<input
+type="file"
+id="upload"
+accept="image/*"
+hidden>
 
+<button id="btnUpload" class="btn">
+Pilih Gambar
+</button>
 
-
-
-
-
-
-
-<!-- =========================
-     MENU SELESAI
-========================= -->
-
-
-<section id="finish-page" class="page">
-
-
-<div class="finish-container">
-
-
-
-    <h3>
-        Twibbon Selesai
-    </h3>
-
-
-
-
-    <div class="result-box">
-
-
-        <img 
-        id="resultImage"
-        >
-
-
-    </div>
-
-
-
-
-
-    <div class="finish-button">
-
-
-        <button id="editAgain">
-            Edit
-        </button>
-
-
-
-
-        <button id="downloadButton">
-            Download
-        </button>
-
-
-
-        <button 
-        id="backHome"
-        style="display:none">
-
-            Beranda
-
-        </button>
-
-
-
-
-    </div>
-
-
+<p id="namaFile">
+..........
+</p>
 
 </div>
 
+</div>
+
+</div>
 
 </section>
 
+<!-- ===========================
+LOADING
+=========================== -->
 
+<section id="loadingPage" class="page">
 
+<div class="loadingWrap">
 
+<div class="loader"></div>
 
+<h2>Memuat Data...</h2>
 
+<p>
+Mohon tunggu sebentar.
+</p>
 
-<!-- =========================
-     FOOTER
-========================= -->
+</div>
 
+</section>
+
+<!-- ===========================
+EDITOR
+=========================== -->
+
+<section id="editorPage" class="page">
+
+<div class="container">
+
+<div class="editorCard">
+
+<div id="canvasWrapper">
+
+<canvas
+id="canvas"
+width="983"
+height="1229">
+</canvas>
+
+</div>
+
+<div class="editorButton">
+
+<button id="zoomIn" class="btn">
+
+Zoom In
+
+</button>
+
+<button id="zoomOut" class="btn">
+
+Zoom Out
+
+</button>
+
+</div>
+
+<div class="editorButton">
+
+<button id="saveBtn" class="btn save">
+
+Simpan
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+SELESAI
+=========================== -->
+
+<section id="finishPage" class="page">
+
+<div class="container">
+
+<div class="finishCard">
+
+<img
+id="hasilImage">
+
+<div class="finishButton">
+
+<button
+id="editAgain"
+class="btn">
+
+Edit
+
+</button>
+
+<button
+id="downloadBtn"
+class="btn">
+
+Download
+
+</button>
+
+</div>
+
+<div class="finishButton">
+
+<button
+id="homeBtn"
+class="btn">
+
+Ke Beranda
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+FOOTER
+=========================== -->
 
 <footer>
 
-    Copyright SMK Sriwijaya 2026
+Copyright SMK Sriwijaya 2026/2027
 
 </footer>
-
-
-
-
 
 <script src="script.js"></script>
 
