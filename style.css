@@ -1,152 +1,154 @@
 /* =====================================
-   IMPORT FONT
+   TWIBBON PENERIMAAN TAMU AMBALAN
+   SMK SRIWIJAYA 2026
+   STYLE CSS PART 1
 ===================================== */
 
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-
+/* RESET */
 
 *{
-
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
-
 }
 
 
-
 body{
-
-    min-height:100vh;
 
     background:
     linear-gradient(
         135deg,
         #2b1608,
-        #5c3215,
+        #5a3216,
         #8b5a2b
     );
 
-    color:white;
+    min-height:100vh;
+    color:#fff;
+    overflow-x:hidden;
 
 }
 
 
+/* =====================================
+   PAGE SYSTEM
+===================================== */
 
+.page{
+
+    display:none;
+    min-height:100vh;
+
+}
+
+
+.page.active{
+
+    display:flex;
+
+}
 
 
 
 /* =====================================
-   INTRO ANIMATION
+   SPLASH SCREEN
 ===================================== */
 
 
-#intro{
+.splash{
 
-    position:fixed;
-
-    width:100%;
-
-    height:100vh;
+    justify-content:center;
+    align-items:center;
 
     background:
+
+    radial-gradient(
+        circle,
+        rgba(255,255,255,.15),
+        transparent 60%
+    ),
+
     linear-gradient(
         135deg,
-        #211006,
-        #704018
+        #3b1d08,
+        #8b5a2b
     );
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:999;
-
-
 
 }
 
 
-
-.intro-box{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    animation:
-    fadeZoom 1.5s ease;
-
-
-
-}
-
-
-
-.intro-logo{
-
-    width:130px;
-
-    max-width:40vw;
-
-}
-
-
-
-.intro-box h1{
-
-    margin-top:20px;
+.splash-content{
 
     text-align:center;
 
-    font-size:30px;
+    animation:
 
-    font-weight:600;
-
+    munculLogo 1.5s ease;
 
 }
 
 
+.logoSplash{
 
-.intro-box p{
+    width:170px;
 
+    max-width:50vw;
+
+    animation:
+
+    floating 3s infinite ease-in-out;
+
+    filter:
+
+    drop-shadow(
+        0 10px 20px
+        rgba(0,0,0,.4)
+    );
+
+}
+
+
+.splash h1{
+
+    margin-top:25px;
+
+    font-size:32px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+
+.splash h3{
+
+    margin-top:8px;
 
     font-size:20px;
 
-    margin-top:5px;
+    font-weight:400;
 
-
-}
-
-
-
-
-.logo-animation-2{
-
-    display:none;
+    opacity:.9;
 
 }
 
 
+/* ANIMATION */
 
 
-@keyframes fadeZoom{
-
+@keyframes munculLogo{
 
     from{
 
         opacity:0;
 
-        transform:scale(.5);
+        transform:
+        translateY(40px)
+        scale(.8);
 
     }
 
@@ -155,44 +157,65 @@ body{
 
         opacity:1;
 
-        transform:scale(1);
+        transform:
+        translateY(0)
+        scale(1);
 
     }
 
+}
+
+
+
+@keyframes floating{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
 
 }
 
 
 
 
-
-
-
-
-
-
 /* =====================================
- HEADER
+   HEADER
 ===================================== */
 
 
-#main-header{
+#mainHeader{
 
+    position:fixed;
+
+    top:0;
+
+    left:0;
 
     width:100%;
 
-    padding:15px 40px;
+    height:80px;
 
     display:flex;
 
     align-items:center;
 
-    justify-content:space-between;
+    justify-content:center;
+
+    gap:25px;
 
 
     background:
 
-    rgba(40,20,5,.8);
+    rgba(55,28,10,.92);
 
 
     backdrop-filter:blur(10px);
@@ -200,89 +223,81 @@ body{
 
     border-bottom:
 
-    1px solid rgba(255,255,255,.2);
+    2px solid
+
+    rgba(255,255,255,.15);
+
+
+    z-index:99;
 
 
 }
 
 
 
-.header-logo{
+#mainHeader img{
 
+    width:55px;
 
-    width:65px;
+    height:55px;
+
+    object-fit:contain;
+
 
 }
 
 
 
-.header-title h2{
-
-
-    text-align:center;
+#mainHeader h2{
 
     font-size:22px;
 
+    text-align:center;
+
     font-weight:600;
 
-
 }
-
-
-
-
-
-
 
 
 
 /* =====================================
- PAGE
+   CONTAINER
 ===================================== */
 
 
-.page{
+.container{
+
+    width:100%;
+
+    padding:
+
+    120px 20px 80px;
 
 
-    min-height:calc(100vh - 150px);
+    display:flex;
 
-    display:none;
+    justify-content:center;
 
-
-}
-
-
-
-
-#home-page{
-
-
-    display:block;
+    align-items:center;
 
 
 }
-
-
-
-
 
 
 
 /* =====================================
- HOME
+   CARD GLOBAL
 ===================================== */
 
 
-.home-container{
+.card,
+.editorCard,
+.finishCard{
 
 
-    width:90%;
+    width:95%;
 
-    max-width:500px;
-
-    margin:50px auto;
-
-    padding:35px;
+    max-width:600px;
 
 
     background:
@@ -290,19 +305,29 @@ body{
     rgba(255,255,255,.12);
 
 
+    border:
+
+    1px solid
+
+    rgba(255,255,255,.2);
+
+
+    backdrop-filter:
+
+    blur(15px);
+
+
     border-radius:25px;
 
 
-    backdrop-filter:blur(15px);
-
+    padding:35px;
 
 
     box-shadow:
 
-    0 15px 40px rgba(0,0,0,.4);
+    0 20px 50px
 
-
-    text-align:center;
+    rgba(0,0,0,.35);
 
 
 
@@ -310,27 +335,180 @@ body{
 
 
 
-.home-container h3{
+/* =====================================
+   FOOTER
+===================================== */
 
 
-    margin-bottom:25px;
-
-    font-size:22px;
+footer{
 
 
-}
+    position:fixed;
 
 
+    bottom:0;
 
 
-
-
-select{
+    left:0;
 
 
     width:100%;
 
-    padding:15px;
+
+    height:45px;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    background:
+
+    rgba(40,20,5,.9);
+
+
+
+    font-size:14px;
+
+
+    z-index:100;
+
+
+}
+
+
+
+/* =====================================
+   MOBILE HEADER
+===================================== */
+
+
+@media(max-width:600px){
+
+
+    #mainHeader{
+
+
+        height:70px;
+
+        gap:10px;
+
+
+    }
+
+
+
+    #mainHeader img{
+
+
+        width:45px;
+
+        height:45px;
+
+
+    }
+
+
+
+    #mainHeader h2{
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+    .splash h1{
+
+
+        font-size:25px;
+
+
+    }
+
+
+
+    .logoSplash{
+
+
+        width:140px;
+
+
+    }
+
+
+
+}
+/* =====================================
+   STYLE CSS PART 2
+   BERANDA - UPLOAD - LOADING
+===================================== */
+
+
+
+/* =====================================
+   BERANDA
+===================================== */
+
+
+.desc{
+
+    text-align:center;
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    margin-bottom:30px;
+
+    font-weight:400;
+
+}
+
+
+
+/* =====================================
+   FORM
+===================================== */
+
+
+.form-group{
+
+    margin-top:25px;
+
+}
+
+
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+
+
+
+/* SELECT PREMIUM */
+
+
+select{
+
+    width:100%;
+
+    padding:15px 20px;
 
     border-radius:15px;
 
@@ -338,38 +516,16 @@ select{
 
     outline:none;
 
+
+    background:
+
+    rgba(255,255,255,.9);
+
+
+    color:#4a260c;
+
+
     font-size:15px;
-
-    margin-bottom:25px;
-
-
-
-}
-
-
-
-
-
-
-
-/* UPLOAD CUSTOM */
-
-
-.upload-box{
-
-
-    display:block;
-
-
-    padding:25px;
-
-
-    border-radius:20px;
-
-
-    border:
-
-    2px dashed #d7a86e;
 
 
     cursor:pointer;
@@ -382,328 +538,600 @@ select{
 
 
 
-.upload-box:hover{
+select:hover{
 
-
-    background:
-
-    rgba(255,255,255,.1);
-
-
-    transform:translateY(-5px);
-
+    transform:translateY(-2px);
 
 }
 
 
 
-.upload-box span{
-
-
-    font-size:17px;
-
-
-}
-
-
-
-.upload-box input{
-
-
-    display:none;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
- EDITOR
-===================================== */
-
-
-.editor-container{
-
-
-    width:95%;
-
-    margin:30px auto;
-
-    text-align:center;
-
-
-}
-
-
-
-.canvas-wrapper{
-
-
-    display:flex;
-
-    justify-content:center;
-
-
-}
-
-
-
-canvas{
-
-
-    width:min(90vw,500px);
-
-
-    height:auto;
-
-
-    background:white;
-
-
-    border-radius:20px;
-
+select:focus{
 
     box-shadow:
 
-    0 15px 40px rgba(0,0,0,.5);
+    0 0 0 3px
 
-
-    touch-action:none;
-
-
-}
-
-
-
-
-
-
-
-.control-panel{
-
-
-    margin-top:25px;
-
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:15px;
+    rgba(255,210,130,.5);
 
 
 }
-
-
-
-
-
-
 
 
 
 /* =====================================
- BUTTON
+   BUTTON PREMIUM
 ===================================== */
 
 
-button{
+.btn{
 
 
-    padding:14px 35px;
+    width:100%;
+
+
+    margin-top:15px;
+
+
+    padding:15px;
 
 
     border:none;
 
 
-    border-radius:30px;
+    border-radius:18px;
 
 
     cursor:pointer;
 
 
-    color:white;
-
-
     background:
 
+
     linear-gradient(
-        135deg,
-        #8b5a2b,
-        #d39b55
+
+    135deg,
+
+    #d49a4a,
+
+    #8b541f
+
     );
 
 
-    font-size:15px;
+    color:white;
+
+
+    font-size:16px;
 
 
     font-weight:600;
 
 
-    transition:.25s;
+    letter-spacing:.5px;
+
 
 
     box-shadow:
 
-    0 8px 20px rgba(0,0,0,.3);
+
+    0 10px 25px
+
+    rgba(0,0,0,.3);
+
+
+    transition:.3s;
+
+
+    position:relative;
+
+    overflow:hidden;
 
 
 }
 
 
 
-button:hover{
+.btn:hover{
 
 
-    transform:translateY(-4px);
+    transform:
 
-
-}
-
-
-
-button:active{
-
-
-    transform:scale(.9);
+    translateY(-4px);
 
 
 }
 
 
 
+.btn:active{
 
 
+    transform:
 
-
-
-
-/* =====================================
- FINISH
-===================================== */
-
-
-.finish-container{
-
-
-    width:90%;
-
-    max-width:600px;
-
-    margin:40px auto;
-
-    text-align:center;
+    scale(.93);
 
 
 }
 
 
 
-.finish-container h3{
+/* efek klik */
+
+.btn::after{
 
 
-    font-size:25px;
-
-    margin-bottom:25px;
+    content:"";
 
 
-}
+    position:absolute;
 
 
+    width:0;
 
 
-.result-box img{
-
-
-    width:min(90vw,450px);
-
-
-    border-radius:20px;
-
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.5);
-
-
-
-}
-
-
-
-
-.finish-button{
-
-
-    margin-top:25px;
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
- FOOTER
-===================================== */
-
-
-footer{
-
-
-    text-align:center;
-
-    padding:20px;
+    height:0;
 
 
     background:
 
-    rgba(0,0,0,.3);
+    rgba(255,255,255,.35);
+
+
+    border-radius:50%;
+
+
+    transform:
+
+    translate(-50%,-50%);
+
+
+    transition:.5s;
+
+
+}
+
+
+
+.btn:active::after{
+
+
+    width:250px;
+
+    height:250px;
+
+
+}
+
+
+
+/* =====================================
+   NAMA FILE
+===================================== */
+
+
+#namaFile{
+
+
+    text-align:center;
+
+
+    margin-top:15px;
 
 
     font-size:14px;
 
 
+    opacity:.8;
+
+
 }
 
 
 
+/* =====================================
+   TOAST PILIH KATEGORI
+===================================== */
 
 
+.toast{
+
+
+    position:fixed;
+
+
+    top:-200px;
+
+
+    left:50%;
+
+
+    transform:
+
+    translateX(-50%);
+
+
+    width:90%;
+
+
+    max-width:420px;
+
+
+    z-index:999;
+
+
+
+    transition:.5s;
+
+
+}
+
+
+
+.toast.show{
+
+
+    top:30px;
+
+
+}
+
+
+
+.toast-box{
+
+
+    background:
+
+
+    rgba(65,32,10,.95);
+
+
+    border-radius:20px;
+
+
+    padding:25px;
+
+
+    text-align:center;
+
+
+    box-shadow:
+
+
+    0 15px 40px
+
+    rgba(0,0,0,.5);
+
+
+    border:
+
+    1px solid
+
+    rgba(255,255,255,.2);
+
+
+}
+
+
+
+.toast-box p{
+
+
+    font-size:16px;
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.toast-box button{
+
+
+    border:none;
+
+
+    padding:10px 35px;
+
+
+    border-radius:20px;
+
+
+    background:#d49a4a;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    font-weight:600;
+
+
+}
 
 
 
 /* =====================================
- MOBILE
+   DOWNLOAD NOTIFICATION
+===================================== */
+
+
+.downloadNotif{
+
+
+    position:fixed;
+
+
+    top:-150px;
+
+
+    left:50%;
+
+
+    transform:
+
+    translateX(-50%);
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #8b541f,
+
+    #d49a4a
+
+    );
+
+
+    padding:20px 35px;
+
+
+    border-radius:0 0 25px 25px;
+
+
+    text-align:center;
+
+
+    font-weight:600;
+
+
+    z-index:999;
+
+
+
+    box-shadow:
+
+    0 10px 30px
+
+    rgba(0,0,0,.4);
+
+
+    transition:.7s;
+
+
+}
+
+
+
+.downloadNotif.show{
+
+
+    top:0;
+
+
+}
+
+
+
+/* =====================================
+   LOADING PAGE
+===================================== */
+
+
+#loadingPage{
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+}
+
+
+
+.loadingWrap{
+
+
+    text-align:center;
+
+
+}
+
+
+
+.loadingWrap h2{
+
+
+    margin-top:30px;
+
+
+    font-size:25px;
+
+
+}
+
+
+
+.loadingWrap p{
+
+
+    margin-top:10px;
+
+
+    opacity:.8;
+
+
+}
+
+
+
+/* LOADER */
+
+
+.loader{
+
+
+    width:90px;
+
+
+    height:90px;
+
+
+    border-radius:50%;
+
+
+    border:
+
+    8px solid
+
+    rgba(255,255,255,.25);
+
+
+    border-top-color:white;
+
+
+    animation:
+
+    rotate 1s linear infinite;
+
+
+}
+
+
+
+@keyframes rotate{
+
+
+    from{
+
+
+        transform:rotate(0deg);
+
+
+    }
+
+
+    to{
+
+
+        transform:rotate(360deg);
+
+
+    }
+
+
+}
+
+
+
+/* =====================================
+   RESPONSIVE BERANDA
 ===================================== */
 
 
 @media(max-width:600px){
 
 
+    .card{
 
-#main-header{
+
+        padding:25px;
+
+
+    }
+
+
+
+    .desc{
+
+
+        font-size:15px;
+
+
+    }
+
+
+
+    .btn{
+
+
+        font-size:14px;
+
+
+    }
+
+
+
+}
+/* =====================================
+   STYLE CSS PART 3 FINAL
+   EDITOR - FINISH - RESPONSIVE
+===================================== */
+
+
+
+/* =====================================
+   EDITOR AREA
+===================================== */
+
+
+.editorCard{
+
+
+    max-width:750px;
+
+    text-align:center;
+
+
+}
+
+
+
+#canvasWrapper{
+
+
+    width:100%;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    overflow:hidden;
+
+
+    border-radius:20px;
+
+
+    background:
+
+    rgba(0,0,0,.25);
 
 
     padding:15px;
@@ -713,63 +1141,448 @@ footer{
 
 
 
-.header-logo{
+/*
+   Canvas tetap ukuran asli
+   supaya twibbon tidak berubah
+*/
 
 
-    width:45px;
-
-
-}
-
-
-
-.header-title h2{
-
-
-    font-size:14px;
-
-
-}
-
-
-
-.intro-box h1{
-
-
-    font-size:22px;
-
-
-}
-
-
-
-.home-container{
-
-
-    padding:25px;
-
-
-}
-
-
-
-button{
+#canvas{
 
 
     width:100%;
 
 
+    max-width:500px;
+
+
+    height:auto;
+
+
+    border-radius:10px;
+
+
+    cursor:move;
+
+
+    touch-action:none;
+
+
+    box-shadow:
+
+
+    0 15px 40px
+
+    rgba(0,0,0,.5);
+
+
 }
 
 
 
-.control-panel{
+/* =====================================
+   EDITOR BUTTON
+===================================== */
 
 
-    flex-direction:column;
+.editorButton{
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    justify-content:center;
+
+
+    margin-top:20px;
 
 
 }
+
+
+
+.editorButton .btn{
+
+
+    width:45%;
+
+
+}
+
+
+
+.save{
+
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #256d1b,
+
+    #4ca83b
+
+    );
+
+
+}
+
+
+
+/* =====================================
+   FINISH PAGE
+===================================== */
+
+
+#finishPage{
+
+
+    justify-content:center;
+
+
+}
+
+
+
+.finishCard{
+
+
+    text-align:center;
+
+
+}
+
+
+
+#hasilImage{
+
+
+    width:100%;
+
+
+    max-width:450px;
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+
+    0 20px 50px
+
+    rgba(0,0,0,.5);
+
+
+}
+
+
+
+.finishButton{
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    margin-top:25px;
+
+
+}
+
+
+
+.finishButton .btn{
+
+
+    flex:1;
+
+
+}
+
+
+
+/* =====================================
+   FINISH BUTTON COLORS
+===================================== */
+
+
+#downloadBtn{
+
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #1f7a34,
+
+    #43b95c
+
+    );
+
+
+}
+
+
+
+#editAgain{
+
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #a66b22,
+
+    #d49a4a
+
+    );
+
+
+}
+
+
+
+#homeBtn{
+
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #553018,
+
+    #8b541f
+
+    );
+
+
+}
+
+
+
+/* =====================================
+   CANVAS MOBILE
+===================================== */
+
+
+@media(max-width:600px){
+
+
+    .container{
+
+
+        padding:
+
+        100px 12px 70px;
+
+
+    }
+
+
+
+    .editorCard{
+
+
+        padding:20px;
+
+
+    }
+
+
+
+    #canvas{
+
+
+        max-width:100%;
+
+
+    }
+
+
+
+    .editorButton{
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+    .editorButton .btn{
+
+
+        width:100%;
+
+
+    }
+
+
+
+    .finishButton{
+
+
+        flex-direction:column;
+
+
+    }
+
+
+
+}
+
+
+
+/* =====================================
+   ANIMASI MASUK HALAMAN
+===================================== */
+
+
+.container,
+.editorCard,
+.finishCard{
+
+
+    animation:
+
+
+    pageEnter .7s ease;
+
+
+}
+
+
+
+@keyframes pageEnter{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+        translateY(30px);
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+        translateY(0);
+
+
+    }
+
+
+}
+
+
+
+/* =====================================
+   SCROLL STYLE
+===================================== */
+
+
+::-webkit-scrollbar{
+
+
+    width:8px;
+
+
+}
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#2b1608;
+
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:#d49a4a;
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+/* =====================================
+   FIX IMAGE DRAG
+===================================== */
+
+
+canvas{
+
+
+    user-select:none;
+
+
+    -webkit-user-select:none;
+
+
+}
+
+
+
+/* =====================================
+   DESKTOP LARGE
+===================================== */
+
+
+@media(min-width:1000px){
+
+
+    .container{
+
+
+        padding-top:120px;
+
+
+    }
+
+
+
+    #canvas{
+
+
+        max-width:550px;
+
+
+    }
+
 
 
 }
